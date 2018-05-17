@@ -23,16 +23,17 @@
         firebase.initializeApp(config);
 
         function writePartyStartTime(partyId, startTime) {
-          firebase.database().ref('party/' + partyId).set({
-          "StartTime": startTime
-        });
+            firebase.database().ref('party/' + partyId).set({
+            "StartTime": startTime
+          });
+        }
 
         function readPartyStartTime(partyId) {
-          return firebase.database().ref('/party/' + partyId).once('value').then(function(snapshot) {
-          var startTime = (snapshot.val().StartTime);
-          document.getElementById("videoID").value = startTime;
-        });
-      }
+            return firebase.database().ref('/party/' + partyId).once('value').then(function(snapshot) {
+            var startTime = (snapshot.val().StartTime);
+            document.getElementById("videoID").value = startTime;
+          });
+        }
     </script>
 
     <script>
