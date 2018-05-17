@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
+	<head>
+	<script type="text/javascript">
+		function changeVideo()
+		{
+			var video = document.getElementById("iframe");
+			video.src = "https://www.youtube.com/embed/vIz9lgLjZtY"
+			return false;
+		}
+	</script>
+	</head>
 	<body>
 		<h1>Hello World 2</h1>
 		<p>I'm page 2! Hosted with GitHub Pages.</p>
 		<p>Youtube Video below</p>
-		<button class ="btn default">Default</button>
+		<button class ="btn default" onclick="changeVideo();">Default</button>
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/uBYzYji4rmE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 	</body>
 </html>
