@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <body>
+    <div>
+      Video: <input type="text" id="myText" value="Insert Video Code">
+      <button onclick="myFunction()">Play</button>
+    </div>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
 
@@ -44,6 +48,11 @@
       }
       function stopVideo() {
         player.stopVideo();
+      }
+
+      function myFunction() {
+        var x = document.getElementById("myText").value;
+        document.getElementById("demo").innerHTML = x;
       }
     </script>
   </body>
