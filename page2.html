@@ -4,6 +4,7 @@
     <div>
       Video: <input type="text" id="videoID" placeholder="Insert Video Code">
       <button onclick="changeVideo()">Change Video</button>
+      <button onclick="readPartyStartTime(1)">Get StartTime</button>
     </div>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
@@ -12,20 +13,26 @@
     <script>
       // Initialize Firebase
       var config = {
-        apiKey: "AIzaSyDJbSlKrOIf60CJ_zH9FBVVyu2vhIFbsyE",
-        authDomain: "sync-10d89.firebaseapp.com",
-        databaseURL: "https://sync-10d89.firebaseio.com",
-        projectId: "sync-10d89",
-        storageBucket: "",
-        messagingSenderId: "607232667662"
-      };
-      firebase.initializeApp(config);
+          apiKey: "AIzaSyDJbSlKrOIf60CJ_zH9FBVVyu2vhIFbsyE",
+          authDomain: "sync-10d89.firebaseapp.com",
+          databaseURL: "https://sync-10d89.firebaseio.com",
+          projectId: "sync-10d89",
+          storageBucket: "",
+          messagingSenderId: "607232667662"
+        };
+        firebase.initializeApp(config);
 
-      function writePartyStartTime(partyId, startTime) {
-        firebase.database().ref('party/' + partyId).set({
-        "StartTime": startTime
-      });
-}
+        function writePartyStartTime(partyId, startTime) {
+          firebase.database().ref('party/' + partyId).set({
+          "StartTime": startTime
+        });
+
+        function readPartyStartTime(partyId) {
+          return firebase.database().ref('/party/' + partyId).once('value').then(function(snapshot) {
+          var startTime = (snapshot.val().StartTime);
+          document.getElementById("videoID").value = startTime;
+        });
+      }
     </script>
 
     <script>
@@ -56,12 +63,9 @@
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         playVideo();
-        document.getElementById("videoID").value = ""
       }
 
       // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
@@ -83,6 +87,7 @@
       function changeVideo() {
         var x = document.getElementById("videoID").value;
         player.loadVideoById(x);
+
         var d = new Date();
         var seconds = d.getTime() / 1000;
         seconds = Math.floor(seconds);
