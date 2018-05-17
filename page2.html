@@ -20,8 +20,14 @@
         messagingSenderId: "607232667662"
       };
       firebase.initializeApp(config);
+
+      function writePartyStartTime(partyId, startTime) {
+        firebase.database().ref('party/' + userId).set({
+        "StartTime": startTime
+      });
+}
     </script>
-    
+
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -76,7 +82,8 @@
 
       function changeVideo() {
         var x = document.getElementById("videoID").value;
-        player.loadVideoById(x);      
+        player.loadVideoById(x);
+        writePartyStartTime(1, time())      
       }
     </script>
   </body>
