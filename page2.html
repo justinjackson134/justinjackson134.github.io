@@ -8,6 +8,20 @@
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
 
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDJbSlKrOIf60CJ_zH9FBVVyu2vhIFbsyE",
+        authDomain: "sync-10d89.firebaseapp.com",
+        databaseURL: "https://sync-10d89.firebaseio.com",
+        projectId: "sync-10d89",
+        storageBucket: "",
+        messagingSenderId: "607232667662"
+      };
+      firebase.initializeApp(config);
+    </script>
+    
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -45,7 +59,7 @@
       var done = false;
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
+          // setTimeout(stopVideo, 6000);
           done = true;
         }
       }
@@ -62,7 +76,7 @@
 
       function changeVideo() {
         var x = document.getElementById("videoID").value;
-        player.loadVideoById(x)
+        player.loadVideoById(x);      
       }
     </script>
   </body>
