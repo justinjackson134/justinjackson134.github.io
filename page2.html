@@ -2,8 +2,8 @@
 <html>
   <body>
     <div>
-      Video: <input type="text" id="myText" value="Insert Video Code">
-      <button onclick="myFunction()">Play</button>
+      Video: <input type="text" id="videoID" placeholder="Insert Video Code">
+      <button onclick="changeVideo()">Change Video</button>
     </div>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
@@ -11,7 +11,6 @@
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
-
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -20,7 +19,7 @@
       //    after the API code downloads.
       var player;
       function onYouTubeIframeAPIReady() {
-        createNewPlayer('M7lc1UVf-VE');
+        createNewPlayer('AXwGVXD7qEQ');
       }
       function createNewPlayer(_videoId) {
         player = new YT.Player('player', {
@@ -49,12 +48,19 @@
           done = true;
         }
       }
+
+
+      // Misc Functions - Wrap Youtube API calls
+      function playVideo() {
+        player.playVideo();
+      }
+
       function stopVideo() {
         player.stopVideo();
       }
 
-      function myFunction() {
-        var x = document.getElementById("myText").value;
+      function changeVideo() {
+        var x = document.getElementById("videoID").value;
         player.loadVideoById(x)
       }
     </script>
