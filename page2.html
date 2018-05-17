@@ -83,7 +83,9 @@
       function changeVideo() {
         var x = document.getElementById("videoID").value;
         player.loadVideoById(x);
-        writePartyStartTime(1, time())      
+        var d = new Date();
+        var seconds = d.getTime() / 1000;
+        writePartyStartTime(1, seconds)      
       }
     </script>
   </body>
