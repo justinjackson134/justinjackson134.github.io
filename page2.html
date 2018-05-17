@@ -4,7 +4,7 @@
 	<script type="text/javascript">
 		function changeVideo()
 		{
-			var video = document.getElementById("iframe");
+			var video = document.getElementById("video");
 			video.src = "https://www.youtube.com/embed/vIz9lgLjZtY";
 			video.width = 0;
 			return false;
@@ -16,6 +16,6 @@
 		<p>I'm page 2! Hosted with GitHub Pages.</p>
 		<p>Youtube Video below</p>
 		<button class ="btn default" onclick="changeVideo();">Default</button>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/uBYzYji4rmE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/uBYzYji4rmE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 	</body>
 </html>
