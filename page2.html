@@ -22,7 +22,7 @@
       firebase.initializeApp(config);
 
       function writePartyStartTime(partyId, startTime) {
-        firebase.database().ref('party/' + userId).set({
+        firebase.database().ref('party/' + partyId).set({
         "StartTime": startTime
       });
 }
