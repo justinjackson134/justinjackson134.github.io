@@ -20,10 +20,13 @@
       //    after the API code downloads.
       var player;
       function onYouTubeIframeAPIReady() {
+        createNewPlayer('M7lc1UVf-VE');
+      }
+      function createNewPlayer(_videoId) {
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-          videoId: 'M7lc1UVf-VE',
+          videoId: _videoId,
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -52,7 +55,7 @@
 
       function myFunction() {
         var x = document.getElementById("myText").value;
-        document.getElementById("demo").innerHTML = x;
+        createNewPlayer(x);
       }
     </script>
   </body>
