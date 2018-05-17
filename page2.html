@@ -85,7 +85,8 @@
         player.loadVideoById(x);
         var d = new Date();
         var seconds = d.getTime() / 1000;
-        writePartyStartTime(1, seconds)      
+        seconds = Math.floor(seconds);
+        writePartyStartTime(1, seconds);     
       }
     </script>
   </body>
