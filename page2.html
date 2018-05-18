@@ -6,6 +6,7 @@
   <body>
     <div style="text-align: center">
       Epoch: <input id="clock" readonly="readonly">
+      StartTime: <input id="startTime" readonly="readonly">
     </div>
 
     <div style="text-align: center">
@@ -49,6 +50,7 @@
             return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
             var videoCode = (snapshot.val().VideoCode);
+            document.getElementById("startTime").value = startTime;
             document.getElementById("videoID").value = videoCode;
             changeVideo(videoCode);
           });
@@ -83,7 +85,7 @@
 
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
-        playVideo();
+        //playVideo();
       }
 
       // 5. The API calls this function when the player's state changes.
@@ -126,6 +128,14 @@
       (function(){
         // run every second
         clock();
+        if(epochTime() >= document.getElementById("startTime").value)
+        {
+          playVideo();
+        }
+        else
+        {
+          stopVideo();
+        }
         setTimeout(arguments.callee, 1000);
       })();
     </script>
