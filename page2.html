@@ -116,6 +116,12 @@
         document.getElementById("videoID").value = epochTime();
         clock();
       }
+
+      (function(){
+        // do some stuff
+        clock();
+        setTimeout(arguments.callee, 60000);
+      })();
     </script>
   </body>
 </html>
