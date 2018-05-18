@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheeet" type="text/css" href="stylesheeet.css"
+    <link rel="stylesheeet" type="text/css" href="stylesheeet.css">
   </head>
   <body>
     <div>
@@ -13,8 +13,7 @@
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div class="video-container">
       <div id='mask'></div>
-      <!-- <div id="player"></div> -->
-      <iframe id="player" frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="640" height="390" src="https://www.youtube.com/embed/AXwGVXD7qEQ?enablejsapi=1&amp;origin=https%3A%2F%2Fjustinjackson134.github.io&amp;widgetid=1"></iframe>
+      <div id="player"></div>
     </div>
 
     
@@ -104,13 +103,6 @@
         seconds = Math.floor(seconds);
         writePartyStartTime(1, seconds);     
       }
-
-      $("div.video-container").mousedown(function() {
-          $('#mask').show();
-      }).mouseup(function() {
-          $('#mask').hide();
-      })
-      .resizable();
     </script>
   </body>
 </html>
