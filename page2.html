@@ -108,8 +108,10 @@
 
       function changeVideo() {
         var x = document.getElementById("videoID").value;
-        player.loadVideoById(x);       
-        writePartyStuff(document.getElementById("PartyCode").value, epochTime(), document.getElementById("videoID").value);     
+        player.loadVideoById(x);
+        player.stopVideo();
+        document.getElementById("startTime").value = epochTime() + 10;
+        writePartyStuff(document.getElementById("PartyCode").value, (epochTime() + 10), document.getElementById("videoID").value);     
       } 
 
       function epochTime() {
