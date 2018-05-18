@@ -5,7 +5,7 @@
   </head>
   <body>
     <div style="text-align: center">
-      Epoch: <input id="clock" readonly="readonly">0</input>
+      Epoch: <input id="clock" readonly="readonly">
     </div>
 
     <div style="text-align: center">
@@ -49,7 +49,6 @@
             return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
             var videoCode = (snapshot.val().VideoCode);
-            document.getElementById("PartyCode").value = startTime;
             document.getElementById("videoID").value = videoCode;
             changeVideo(videoCode);
           });
