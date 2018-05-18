@@ -21,7 +21,7 @@
     <div style="text-align: center">
       Video: <input type="text" id="videoID" placeholder="Insert Video Code">
       <button onclick="changeVideo()">Change Video</button>
-      <button onclick="readPartyStartTime(1)">Get StartTime</button>
+      <button onclick="readPartyStuff(document.getElementById("PartyCode").value)">SyncMe</button>
     </div>
 
     <!-- FIREBASE SCRIPTS -->
@@ -48,7 +48,10 @@
         function readPartyStartTime(partyId) {
             return firebase.database().ref('/party/' + partyId).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
-            document.getElementById("videoID").value = startTime;
+            var videoID = (snapshot.val().VideoCode);
+            document.getElementById("PartyCode").value = startTime;
+            document.getElementById("videoID").value = videoCode;
+            changeVideo(videoCode);
           });
         }
     </script>
