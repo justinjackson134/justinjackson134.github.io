@@ -16,10 +16,9 @@
     <div class="video-container">
       <div id='mask'></div>
       <div id="player"></div>
-    </div>
+    </div>    
 
-    
-
+    <!-- FIREBASE SCRIPTS -->
     <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -47,6 +46,7 @@
         }
     </script>
 
+    <!-- YOUTUBE SCRIPTS -->
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -86,7 +86,6 @@
         }
       }
 
-
       // Misc Functions - Wrap Youtube API calls
       function playVideo() {
         player.playVideo();
@@ -104,8 +103,11 @@
         var seconds = d.getTime() / 1000;
         seconds = Math.floor(seconds);
         writePartyStartTime(1, seconds);     
-      }
+      }      
+    </script>
 
+    <!-- RESIZABLE YOUTUBE WINDOW CODE -->
+    <script type="text/javascript">
       $("div.video-container")
         .mousedown(function() {
             $('#mask').show();
