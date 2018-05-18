@@ -4,7 +4,11 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
   <body>
-    <div style="text-align: center" onload="clock()">
+    <div style="text-align: center">
+      Epoch: <textarea id="clock">0</textarea>
+    </div>
+
+    <div style="text-align: center">
       Party Code: <input type="text" id="PartyCode" placeholder="Insert Party Code">
     </div>
     
@@ -34,9 +38,10 @@
         };
         firebase.initializeApp(config);
 
-        function writePartyStartTime(partyId, startTime) {
+        function writePartyStartTime(partyId, startTime, videoCode) {
             firebase.database().ref('party/' + partyId).set({
-            "StartTime": startTime
+            "StartTime": startTime,
+            "VideoCode": videoCode
           });
         }
 
@@ -100,7 +105,7 @@
       function changeVideo() {
         var x = document.getElementById("videoID").value;
         player.loadVideoById(x);       
-        writePartyStartTime(1, epochTime());     
+        writePartyStartTime(document.getElementById("PartyCode").value, epochTime(), document.getElementById("videoID").value);     
       } 
 
       function epochTime() {
@@ -113,11 +118,11 @@
 
     <script>
       function clock() {        
-        document.getElementById("videoID").value = epochTime();
+        document.getElementById("clock").value = epochTime();
       }
 
       (function(){
-        // do some stuff
+        // run every second
         clock();
         setTimeout(arguments.callee, 1000);
       })();
