@@ -103,6 +103,15 @@
         seconds = Math.floor(seconds);
         writePartyStartTime(1, seconds);     
       }
+
+      $("div.video-container")
+        .mousedown(function() {
+            $('#mask').show();
+        })
+        .mouseup(function() {
+            $('#mask').hide();
+        })
+        .resizable();
     </script>
   </body>
 </html>
