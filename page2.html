@@ -129,13 +129,14 @@
       (function(){
         // run every second
         clock();
-        if(epochTime() >= document.getElementById("startTime").value)
+        if(document.getElementById("startTime").value > 0)
         {
-          playVideo();
-        }
-        else
-        {
-          stopVideo();
+          if(epochTime() >= document.getElementById("startTime").value) {
+            playVideo();
+          }
+          else {
+            stopVideo();
+          }
         }
         setTimeout(arguments.callee, 1000);
       })();
