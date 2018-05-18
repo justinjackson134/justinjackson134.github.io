@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
   <body>
-    <div style="text-align: center">
+    <div style="text-align: center" onload="clock()">
       Party Code: <input type="text" id="PartyCode" placeholder="Insert Party Code">
     </div>
     
@@ -117,10 +117,6 @@
         x.value = epochTime();
         clock();
       }
-
-      window.onload = function() {
-        clock();
-      };
     </script>
   </body>
 </html>
