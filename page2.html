@@ -99,13 +99,24 @@
 
       function changeVideo() {
         var x = document.getElementById("videoID").value;
-        player.loadVideoById(x);
+        player.loadVideoById(x);       
+        writePartyStartTime(1, epochTime());     
+      } 
 
+      function epochTime() {
         var d = new Date();
         var seconds = d.getTime() / 1000;
         seconds = Math.floor(seconds);
-        writePartyStartTime(1, seconds);     
-      }      
+        return seconds;
+      }     
+    </script>
+
+    <script>
+      function clock() {
+        var x = document.getElementById("videoID").value;
+        x.value = epochTime();
+        clock();
+      }
     </script>
   </body>
 </html>
