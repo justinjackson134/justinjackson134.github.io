@@ -25,20 +25,40 @@
       <button onclick="readPartyStuff()">SyncMe</button>
     </div>
 
-    <!-- Initializing Functions -->
+    <!-- FIREBASE SCRIPTS -->
     <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
     <script>
       // Initialize Firebase
       var config = {
-        apiKey: "AIzaSyDJbSlKrOIf60CJ_zH9FBVVyu2vhIFbsyE",
-        authDomain: "sync-10d89.firebaseapp.com",
-        databaseURL: "https://sync-10d89.firebaseio.com",
-        projectId: "sync-10d89",
-        storageBucket: "",
-        messagingSenderId: "607232667662"
-      };
-      firebase.initializeApp(config);
+          apiKey: "AIzaSyDJbSlKrOIf60CJ_zH9FBVVyu2vhIFbsyE",
+          authDomain: "sync-10d89.firebaseapp.com",
+          databaseURL: "https://sync-10d89.firebaseio.com",
+          projectId: "sync-10d89",
+          storageBucket: "",
+          messagingSenderId: "607232667662"
+        };
+        firebase.initializeApp(config);
 
+        function writePartyStuff(partyId, startTime, videoCode) {
+            firebase.database().ref('party/' + partyId).set({
+            "StartTime": startTime,
+            "VideoCode": videoCode
+          });            
+        }
+
+        function readPartyStuff() {
+            return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
+            var startTime = (snapshot.val().StartTime);
+            var videoCode = (snapshot.val().VideoCode);
+            document.getElementById("startTime").value = startTime;
+            document.getElementById("videoID").value = videoCode;
+            player.loadVideoById(videoCode);            
+          });
+        }
+    </script>
+
+    <!-- YOUTUBE SCRIPTS -->
+    <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
@@ -62,10 +82,12 @@
           }
         });
       }
-    </script>
 
-    <!-- Syncing Functions -->
-    <script>
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        //playVideo();
+      }
+
       // 5. The API calls this function when the player's state changes.
       var done = false;
       function onPlayerStateChange(event) {
@@ -87,27 +109,16 @@
       function changeVideo() {
         var x = document.getElementById("videoID").value;
         player.loadVideoById(x);
-        var time = epochTime() + 10;
-        document.getElementById("startTime").value = time;
-        writePartyStuff(document.getElementById("PartyCode").value, time, document.getElementById("videoID").value);  
+        document.getElementById("startTime").value = epochTime() + 10;
+        writePartyStuff(document.getElementById("PartyCode").value, (epochTime() + 10), document.getElementById("videoID").value);  
       } 
 
-      function writePartyStuff(partyId, startTime, videoCode) {
-          firebase.database().ref('party/' + partyId).set({
-          "StartTime": startTime,
-          "VideoCode": videoCode
-        });            
-      }
-
-      function readPartyStuff() {
-          return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
-          var startTime = (snapshot.val().StartTime);
-          var videoCode = (snapshot.val().VideoCode);
-          document.getElementById("startTime").value = startTime;
-          document.getElementById("videoID").value = videoCode;
-          player.loadVideoById(videoCode);            
-        });
-      }
+      function epochTime() {
+        var d = new Date();
+        var seconds = d.getTime() / 1000;
+        seconds = Math.floor(seconds);
+        return seconds;
+      }     
     </script>
 
     <script>
@@ -115,19 +126,9 @@
         document.getElementById("clock").value = epochTime();
       }
 
-      function epochTime() {
-        var d = new Date();
-        var seconds = d.getTime() / 1000;
-        seconds = Math.floor(seconds);
-        return seconds;
-      }    
-
-      // Control function that runs constantly
       (function(){
-        // Run every second
+        // run every second
         clock();
-
-        // If we have joined a party or started one
         if(document.getElementById("startTime").value > 0)
         {
           if(epochTime() >= document.getElementById("startTime").value) {
