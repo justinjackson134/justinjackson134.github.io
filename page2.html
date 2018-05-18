@@ -38,23 +38,6 @@
         messagingSenderId: "607232667662"
       };
       firebase.initializeApp(config);
-
-      function writePartyStuff(partyId, startTime, videoCode) {
-          firebase.database().ref('party/' + partyId).set({
-          "StartTime": startTime,
-          "VideoCode": videoCode
-        });            
-      }
-
-      function readPartyStuff() {
-          return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
-          var startTime = (snapshot.val().StartTime);
-          var videoCode = (snapshot.val().VideoCode);
-          document.getElementById("startTime").value = startTime;
-          document.getElementById("videoID").value = videoCode;
-          loadVideoById(videoCode);            
-        });
-      }
     </script>
 
     <!-- Syncing Functions -->
