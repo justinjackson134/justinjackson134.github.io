@@ -21,7 +21,7 @@
     <div style="text-align: center">
       Video: <input type="text" id="videoID" placeholder="Insert Video Code">
       <button onclick="changeVideo()">Change Video</button>
-      <button onclick="readPartyStuff(document.getElementById("PartyCode").value)">SyncMe</button>
+      <button onclick="readPartyStuff()">SyncMe</button>
     </div>
 
     <!-- FIREBASE SCRIPTS -->
@@ -38,15 +38,15 @@
         };
         firebase.initializeApp(config);
 
-        function writePartyStartTime(partyId, startTime, videoCode) {
+        function writePartyStuff(partyId, startTime, videoCode) {
             firebase.database().ref('party/' + partyId).set({
             "StartTime": startTime,
             "VideoCode": videoCode
           });
         }
 
-        function readPartyStartTime(partyId) {
-            return firebase.database().ref('/party/' + partyId).once('value').then(function(snapshot) {
+        function readPartyStartTime() {
+            return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
             var videoID = (snapshot.val().VideoCode);
             document.getElementById("PartyCode").value = startTime;
@@ -108,7 +108,7 @@
       function changeVideo() {
         var x = document.getElementById("videoID").value;
         player.loadVideoById(x);       
-        writePartyStartTime(document.getElementById("PartyCode").value, epochTime(), document.getElementById("videoID").value);     
+        writePartyStuff(document.getElementById("PartyCode").value, epochTime(), document.getElementById("videoID").value);     
       } 
 
       function epochTime() {
