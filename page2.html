@@ -48,7 +48,7 @@
         function readPartyStuff() {
             return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
-            var videoID = (snapshot.val().VideoCode);
+            var videoCode = (snapshot.val().VideoCode);
             document.getElementById("PartyCode").value = startTime;
             document.getElementById("videoID").value = videoCode;
             changeVideo(videoCode);
