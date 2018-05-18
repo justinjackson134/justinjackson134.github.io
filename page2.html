@@ -112,9 +112,8 @@
     </script>
 
     <script>
-      function clock() {
-        var x = document.getElementById("videoID").value;
-        x.value = epochTime();
+      function clock() {        
+        document.getElementById("videoID").value = epochTime();
         clock();
       }
     </script>
