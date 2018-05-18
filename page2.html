@@ -5,7 +5,7 @@
   </head>
   <body>
     <div style="text-align: center">
-      Epoch: <textarea id="clock">0</textarea>
+      Epoch: <text id="clock">0</text>
     </div>
 
     <div style="text-align: center">
@@ -45,7 +45,7 @@
           });
         }
 
-        function readPartyStartTime() {
+        function readPartyStuff() {
             return firebase.database().ref('/party/' + document.getElementById("PartyCode").value).once('value').then(function(snapshot) {
             var startTime = (snapshot.val().StartTime);
             var videoID = (snapshot.val().VideoCode);
